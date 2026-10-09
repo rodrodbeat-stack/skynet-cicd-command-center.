@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050b12">
+<title>SKYNET // CI/CD CONTROL</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="scanlines"></div>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">◈</span><div><b>SKYNET<span class="cyan">/OPS</span></b><small>CONTINUOUS DELIVERY CONTROL</small></div></div>
+  <div class="top-status"><span class="pulse"></span> SISTEMA OPERATIVO <span class="divider">|</span> CLUSTER: <b>PROD-01</b></div>
+  <div class="clock" id="clock">--:--:--</div>
+</header>
+<main>
+  <section class="hero">
+    <div class="eyebrow">▰ CENTRO DE OPERACIONES // PIPELINE VISUALIZER</div>
+    <h1>DEL COMMIT A <span class="glow">PRODUCCIÓN</span></h1>
+    <p>Flujo CI/CD supervisado en tiempo real · GitLab · Quality Gates · Seguridad · Deploy · Observabilidad</p>
+  </section>
+
+  <section class="metrics">
+    <article class="metric"><span>PIPELINE ACTUAL</span><strong id="pipelineId">#8421</strong><small class="good">● READY TO RUN</small></article>
+    <article class="metric"><span>ETAPAS COMPLETADAS</span><strong id="stageCount">08 <i>/ 08</i></strong><small>BUILD → RELEASE</small></article>
+    <article class="metric"><span>QUALITY GATE</span><strong class="green" id="quality">PASSED</strong><small>Tests · SAST · Dependencies</small></article>
+    <article class="metric"><span>PRODUCCIÓN</span><strong class="green" id="prodStatus">HEALTHY</strong><small>99.98% disponibilidad</small></article>
+  </section>
+
+  <section class="workspace">
+    <div class="section-head"><div><span class="tiny-label">01 / DELIVERY PIPELINE</span><h2>Ruta de despliegue</h2></div><div class="head-actions"><span class="legend"><i class="dot done"></i> COMPLETADO</span><span class="legend"><i class="dot wait"></i> PENDIENTE</span><button id="runBtn" class="run-btn">▶ EJECUTAR PIPELINE</button></div></div>
+    <div class="pipeline" id="pipeline">
+      <div class="stage done" data-stage="0"><div class="stage-icon">⌘</div><span class="stage-num">STAGE 01</span><h3>Developer</h3><p>Código + commit</p><small>feature → main</small><b class="stage-state">COMPLETADO ✓</b></div>
+      <div class="connector active"><span>push</span></div>
+      <div class="stage done" data-stage="1"><div class="stage-icon">⑂</div><span class="stage-num">STAGE 02</span><h3>GitLab</h3><p>Merge request</p><small>Code review</small><b class="stage-state">COMPLETADO ✓</b></div>
+      <div class="connector active"><span>trigger</span></div>
+      <div class="stage done" data-stage="2"><div class="stage-icon">⚙</div><span class="stage-num">STAGE 03</span><h3>CI Pipeline</h3><p>Build + lint</p><small>Runner / jobs</small><b class="stage-state">COMPLETADO ✓</b></div>
+      <div class="connector active"><span>test</span></div>
+      <div class="stage done" data-stage="3"><div class="stage-icon">✓</div><span class="stage-num">STAGE 04</span><h3>Quality Gate</h3><p>Unit + integration</p><small>Coverage / quality</small><b class="stage-state">COMPLETADO ✓</b></div>
+      <div class="connector active"><span>scan</span></div>
+      <div class="stage done" data-stage="4"><div class="stage-icon">⬡</div><span class="stage-num">STAGE 05</span><h3>Security</h3><p>SAST + SCA</p><small>Secrets / CVEs</small><b class="stage-state">COMPLETADO ✓</b></div>
+      <div class="connector active"><span>package</span></div>
+      <div class="stage done" data-stage="5"><div class="stage-icon">▣</div><span class="stage-num">STAGE 06</span><h3>Artifact</h3><p>Container image</p><small>Registry + version</small><b class="stage-state">COMPLETADO ✓</b></div>
+      <div class="connector active"><span>deploy</span></div>
+      <div class="stage done" data-stage="6"><div class="stage-icon">◉</div><span class="stage-num">STAGE 07</span><h3>Staging</h3><p>Smoke + E2E tests</p><small>Pre-producción</small><b class="stage-state">COMPLETADO ✓</b></div>
+      <div class="connector active"><span>approve</span></div>
+      <div class="stage done production" data-stage="7"><div class="stage-icon">⌂</div><span class="stage-num">STAGE 08</span><h3>Producción</h3><p>Deploy controlado</p><small>Canary / rollback</small><b class="stage-state">HEALTHY ✓</b></div>
+    </div>
+    <div class="pipeline-foot"><span><i class="pulse"></i> FLUJO MONITOREADO</span><span>POLÍTICA: <b>NO PASS → NO DEPLOY</b></span><span>ESTRATEGIA: <b>ROLLING / CANARY</b></span></div>
+  </section>
+
+  <section class="lower-grid">
+    <article class="panel radar-panel">
+      <div class="panel-title"><div><span class="tiny-label">02 / OBSERVABILIDAD</span><h2>Radar de infraestructura</h2></div><span class="live-tag">LIVE SIMULATION</span></div>
+      <div class="radar-wrap"><div class="radar"><div class="radar-cross"></div><div class="sweep"></div><i class="blip b1"></i><i class="blip b2"></i><i class="blip b3"></i><i class="blip b4"></i><div class="radar-center">OPS</div></div><div class="radar-readout"><div><span>NODOS ACTIVOS</span><b>12 / 12</b></div><div><span>LATENCIA P95</span><b>84 <small>ms</small></b></div><div><span>ERROR RATE</span><b class="green">0.02%</b></div><div><span>AMENAZAS</span><b class="green">0 DETECTADAS</b></div></div></div>
+    </article>
+    <article class="panel">
+      <div class="panel-title"><div><span class="tiny-label">03 / EVENT STREAM</span><h2>Registro de actividad</h2></div><span class="live-tag">SYSTEM LOG</span></div>
+      <div class="logs" id="logs">
+        <div><time>00:18:02</time><b class="log-ok">[PASS]</b><span>Deploy validado en producción</span></div>
+        <div><time>00:17:46</time><b class="log-ok">[PASS]</b><span>Smoke tests completados · 24/24</span></div>
+        <div><time>00:17:21</time><b class="log-info">[INFO]</b><span>Approval recibido · release v2.8.4</span></div>
+        <div><time>00:16:53</time><b class="log-ok">[PASS]</b><span>Escaneo SAST/SCA sin bloqueos</span></div>
+        <div><time>00:16:12</time><b class="log-info">[INFO]</b><span>Imagen publicada en registry</span></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="controls">
+    <div><span class="tiny-label">04 / GOBERNANZA</span><h2>Controles antes de producción</h2></div>
+    <div class="control-list"><span><i>✓</i> Revisión de código</span><span><i>✓</i> Tests automatizados</span><span><i>✓</i> Escaneo de vulnerabilidades</span><span><i>✓</i> Aprobación manual</span><span><i>✓</i> Rollback preparado</span></div>
+  </section>
+</main>
+<footer><span>SKYNET/OPS <b>·</b> CI/CD COMMAND CENTER</span><span>SECURE BY DESIGN <b>·</b> OBSERVE EVERYTHING</span><span>BUILD <b>2.8.4</b></span></footer>
+<script src="app.js"></script>
+</body>
+</html>
